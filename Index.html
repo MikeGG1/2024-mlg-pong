@@ -16,35 +16,44 @@
     <canvas id="pongCanvas" width="800" height="600"></canvas>
 
     <script>
-        const canvas = document.getElementById('pongCanvas');
-        const ctx = canvas.getContext('2d');
+// Get the canvas and its 2D rendering context
+const canvas = document.getElementById('pongCanvas');
+const ctx = canvas.getContext('2d');
 
-        let ballX = canvas.width / 2;
-        let ballY = canvas.height / 2;
-        let ballSpeedX = 5;
-        let ballSpeedY = 5;
-        const ballSize = 10;
+// Set initial ball position and speed
+let ballX = canvas.width / 2;
+let ballY = canvas.height / 2;
+let ballSpeedX = 5;
+let ballSpeedY = 5;
+const ballSize = 10; // Ball size
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+// Function to draw game elements
+function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.beginPath();
-            ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
-            ctx.fillStyle = 'white';
-            ctx.fill();
-            ctx.closePath();
+    // Draw ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, ballSize, 0, Math.PI * 2);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.closePath();
 
-            ballX += ballSpeedX;
-            ballY += ballSpeedY;
+    // Move ball
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
 
-            if (ballY + ballSize > canvas.height || ballY - ballSize < 0) {
-                ballSpeedY = -ballSpeedY;
-            }
+    // Reverse ball direction if it hits top or bottom edge
+    if (ballY + ballSize > canvas.height || ballY - ballSize < 0) {
+        ballSpeedY = -ballSpeedY;
+    }
 
-            requestAnimationFrame(draw);
-        }
+    // Request next animation frame
+    requestAnimationFrame(draw);
+}
 
-        draw();
+// Start animation loop
+draw();
     </script>
 </body>
 </html>
